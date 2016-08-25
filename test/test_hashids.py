@@ -174,3 +174,7 @@ class TestDecoding(object):
     def test_illegal_decode_hex(self):
         assert Hashids().decode_hex('') == ''
         assert Hashids().decode_hex('WxMLpERDrmh25Lp4L3xEfM6WovWYO3IjkRMKR2ogCMVlqt1WK8jKq7OsEp1Vi2p') == ''
+        
+    def test_special_alphabet(self):
+        hashids = Hashids(salt="this is my salt", alphabet="ABCDEFGhijklmn34567890-", min_length=0)
+        assert hashids.encode(1, 2, 3, 4, 5) == "6nhmFDikA0"
